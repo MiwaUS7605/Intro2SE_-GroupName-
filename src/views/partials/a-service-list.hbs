@@ -1,0 +1,121 @@
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb bg-white">
+    <div class="row">
+        <div class="col-lg-10 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">SERVICE LIST</h4>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 align-content-end">
+                <button class="site-btn"><a href="/admin/service-list/create-info" class="link-btn">Create</a></button>
+        </div>
+        <br>
+        <br>
+        
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- RECENT SALES -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <form>
+
+                    <div class="row">
+                        <div class="d-md-flex mb-6  ms-auto">
+                        <div class="app-search d-none d-md-block me-8">
+                            <input name="search" type="text" placeholder="Search service..." class="">
+                            <button type="submit" class="site-btn"><i class="fa fa-search"></i></button>
+                           
+                        </div>
+                        <div class="col-8 d-md-flex mb-3">
+                        
+                        <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
+                            <select name="sort" class="form-select shadow-none row border-top" onchange="sortSer(this.value)">
+                                <option value="0">Sort by</option>
+                                <option value="1" onclick="sortSer(this.value)">Latest</option>
+                                <option value="2" onclick="sortSer(this.value)">Ascending price</option>
+                                <option value="3" onclick="sortSer(this.value)">Descending price</option>
+                                <option value="4" onclick="sortSer(this.value)">Highest total purchase</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>                
+                
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table no-wrap">
+                        <thead>
+                            <tr>
+                                <th class="auto-index border-top-0">No.</th>
+                                <th class="border-top-0">ID</th>
+                                <th class="border-top-0">Name</th>
+                                <th class="border-top-0">Price</th>
+                                <th class="border-top-0">Type</th>
+                                <th class="border-top-0">Total purchase</th>
+                                <th class="border-top-0">Availability</th>
+                                <th class="border-top-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-pagination">
+
+                            {{#each_fromto services pagination_info.first_result pagination_info.last_result}}
+                           
+
+                            
+                                <tr class='clickable-row'  value="{{idservice}}" data-href='/admin/service-list/edit?idservice={{idservice}}'>
+                                    <td></td>
+                                    <td>{{idservice}}</td>
+                                    <td class="txt-oflo">{{servicename}}</td>
+                                    <td>{{price}}</td>
+                                    <td class="txt-oflo">{{typename}}</td>
+                                    <td><span class="text-success">{{totalpurchase}}</span></td>
+                                    <td>{{availability}}</td>
+                                    
+                                    <td><button class="site-btn btn-danger delete-btn" onclick="deleteService(this.value)" value="{{idservice}}" >Delete</button></td>
+                                </tr>
+                            {{/each_fromto}}
+                           
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div id="paginator-items" class="product__pagination text-center">
+
+                        {{!-- <a href="{{originalUrl}}&page=1">First</a> --}}
+
+                        {{#if pagination_info.has_previous_page}}
+                        <button class="service-btn" onclick="paginationDisplay(this.value)"
+                            value="{{pagination_info.previous_page}}">
+                            <a><i class="fa fa-long-arrow-left"></i></a>
+                        </button>
+                        {{/if}}
+
+                        {{#for pagination_info.first_page pagination_info.last_page 1 originalUrl}}
+                            <button class="service-btn" onclick="paginationDisplay(this.value)" value="{{@index}}">
+                                <a>{{@index}}</a>
+                            </button>
+                        {{/for}}
+
+                        {{#if pagination_info.has_next_page}}
+                        <button class="service-btn" onclick="paginationDisplay(this.value)"
+                            value="{{pagination_info.next_page}}">
+                            <a><i class="fa fa-long-arrow-right"></i></a>
+                        </button>
+
+                        {{/if}}
+
+                        {{!-- <a href="{{originalUrl}}&page={{pagination_info.total_pages}}">Last</a> --}}
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
