@@ -1,5 +1,7 @@
 const laundryService = require('./LaundryService');
 const authService = require('../auth/AuthService');
+const shopRepo = require('../shop/ShopRepository');
+
 const createError = require('http-errors');
 const qs = require('qs');
 const Paginator = require('paginator');
@@ -52,12 +54,13 @@ class ServiceController {
         }
         if (!products) return next(createError(404));
 
-        let ratings = [];
+        // let ratings = [];
         
-        ratings = await laundryService.getrating(serviceId);
-        const countResult = Object.keys(ratings).length;
+        // ratings = await laundryService.getrating(serviceId);
+        // const countResult = Object.keys(ratings).length;
         
-        res.render('users/shop-details', { service,products,ratings,countResult});
+        // res.render('users/shop-details', { service,products,ratings,countResult});
+        res.render('users/service-details', { service,products });
     }
 
     async featuredproducts(req, res, next) {
@@ -71,27 +74,31 @@ class ServiceController {
         }
         if (!services) return next(createError(404));
         const { sort, ...withoutSort } = req.query;
-        res.render('users/home',  { services, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}`});
+
+        let shops = [];
+        shops = await shopRepo.getAll();
+
+        res.render('users/home',  { services, shops, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}`});
     }
 
-    async ratingproduct(req, res) {
-        try{ 
-            const { rate,message, idservice } = req.body;
+    // async ratingproduct(req, res) {
+    //     try{ 
+    //         const { rate,message, idservice } = req.body;
 
-            console.log(rate, message, idservice);
+    //         console.log(rate, message, idservice);
 
             
-            let email = res.locals.user.email;
-            //if (!email) return;
+    //         let email = res.locals.user.email;
+    //         //if (!email) return;
             
-            const iduser = await authService.getUserIdByEmail(email);
-            await laundryService.rating(rate,message,idservice,iduser['idcustomer']);
-            console.log(iduser);
-        }catch(e){
-            console.log(e.message);
-            return;
-        }
-    }
+    //         const iduser = await authService.getUserIdByEmail(email);
+    //         await laundryService.rating(rate,message,idservice,iduser['idcustomer']);
+    //         console.log(iduser);
+    //     }catch(e){
+    //         console.log(e.message);
+    //         return;
+    //     }
+    // }
 }
 
 module.exports = new ServiceController;
