@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `db_laundry` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci */;
-USE `db_laundry`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: db_laundry
@@ -18,6 +16,38 @@ USE `db_laundry`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `account` (
+  `idaccount` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `phonenumber` varchar(12) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `address` varchar(256) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `email` varchar(256) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL DEFAULT '1234567890',
+  `role` int(11) DEFAULT '1',
+  PRIMARY KEY (`idaccount`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `FK_ROLE_idx` (`role`),
+  CONSTRAINT `FK_ROLE` FOREIGN KEY (`role`) REFERENCES `role` (`idrole`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `account`
+--
+
+LOCK TABLES `account` WRITE;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` VALUES (1,'Lê Hoàng Khanh Nguyên ','123478909','ABC','ikdskajjfjjj@gmail.com','1234567890',1),(2,'Lăng Thảo Thảo','823973242','ABC','ksjkjalfwij@gmail.com','1234567890',1),(3,'Nguyễn Minh Quang','712731994','ABC','jhsdausjd@gmail.com','1234567890',1),(4,'Lê Hoài Phương','828399493','ABC','jkdi8yedj@gmail.com','1234567890',1),(5,'Bành Hảo Toàn','839828239','ABC','9ieifesieh@gmail.com','1234567890',1),(10,'SUN Company','123456789','KHTN TPHCM','suncompany@gmail.com','suncompany4p',2);
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cart`
 --
 
@@ -32,7 +62,7 @@ CREATE TABLE `cart` (
   PRIMARY KEY (`idcart`),
   KEY `FK_CA_CU_idx` (`idcustomer`),
   KEY `FK_CA_SE_idx` (`idservice`),
-  CONSTRAINT `FK_CA_CU` FOREIGN KEY (`idcustomer`) REFERENCES `customer` (`idcustomer`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_CA_CU` FOREIGN KEY (`idcustomer`) REFERENCES `account` (`idaccount`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_CA_SE` FOREIGN KEY (`idservice`) REFERENCES `service` (`idservice`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -47,60 +77,6 @@ LOCK TABLES `cart` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `customer`
---
-
-DROP TABLE IF EXISTS `customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer` (
-  `idcustomer` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `phonenumber` varchar(12) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `address` varchar(256) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `email` varchar(256) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL DEFAULT '1234567890',
-  `status` int(11) DEFAULT '1',
-  `isAdmin` int(11) DEFAULT '0',
-  PRIMARY KEY (`idcustomer`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `customer`
---
-
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Lê Hoàng Khanh Nguyên ','123478909','ABC','ikdskajjfjjj@gmail.com','1234567890',1,0),(2,'Lăng Thảo Thảo','823973242','ABC','ksjkjalfwij@gmail.com','1234567890',1,0),(3,'Nguyễn Minh Quang','712731994','ABC','jhsdausjd@gmail.com','1234567890',1,0),(4,'Lê Hoài Phương','828399493','ABC','jkdi8yedj@gmail.com','1234567890',1,0),(5,'Bành Hảo Toàn','839828239','ABC','9ieifesieh@gmail.com','1234567890',1,0);
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `image`
---
-
-DROP TABLE IF EXISTS `image`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `image` (
-  `idservice` int(11) NOT NULL,
-  `image` varchar(256) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  PRIMARY KEY (`idservice`,`image`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `image`
---
-
-LOCK TABLES `image` WRITE;
-/*!40000 ALTER TABLE `image` DISABLE KEYS */;
-/*!40000 ALTER TABLE `image` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `order`
 --
 
@@ -111,14 +87,17 @@ CREATE TABLE `order` (
   `idorder` int(11) NOT NULL AUTO_INCREMENT,
   `idcustomer` int(11) NOT NULL,
   `totalprice` int(11) DEFAULT '0',
+  `shipfee` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT '10000',
   `address` varchar(256) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `phonenumber` varchar(12) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `time` date DEFAULT NULL,
   `status` int(11) DEFAULT '0',
+  `idshop` int(11) NOT NULL,
+  `iddeliverer` int(11) DEFAULT NULL,
   PRIMARY KEY (`idorder`),
   KEY `FK_ORDER_CUSTOMER_idx` (`idcustomer`),
   KEY `FK_ORDER_STATUS_idx` (`status`),
-  CONSTRAINT `FK_ORDER_CUSTOMER` FOREIGN KEY (`idcustomer`) REFERENCES `customer` (`idcustomer`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ORDER_CUSTOMER` FOREIGN KEY (`idcustomer`) REFERENCES `account` (`idaccount`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ORDER_STATUS` FOREIGN KEY (`status`) REFERENCES `orderstatus` (`idstatus`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -129,7 +108,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1,0,NULL,NULL,NULL,0),(2,1,0,NULL,NULL,NULL,0),(3,2,0,NULL,NULL,NULL,0),(4,3,0,NULL,NULL,NULL,0),(5,4,0,NULL,NULL,NULL,0);
+INSERT INTO `order` VALUES (1,1,0,'10000',NULL,NULL,NULL,0,0,NULL),(2,1,0,'10000',NULL,NULL,NULL,0,0,NULL),(3,2,0,'10000',NULL,NULL,NULL,0,0,NULL),(4,3,0,'10000',NULL,NULL,NULL,0,0,NULL),(5,4,0,'10000',NULL,NULL,NULL,0,0,NULL);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +160,7 @@ CREATE TABLE `orderstatus` (
 
 LOCK TABLES `orderstatus` WRITE;
 /*!40000 ALTER TABLE `orderstatus` DISABLE KEYS */;
-INSERT INTO `orderstatus` VALUES (0,'Processing'),(1,'Completed');
+INSERT INTO `orderstatus` VALUES (0,'Collecting'),(1,'Processing'),(2,'Delivering'),(3,'Completed');
 /*!40000 ALTER TABLE `orderstatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,11 +172,12 @@ DROP TABLE IF EXISTS `rating`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rating` (
-  `idservice` int(11) NOT NULL,
+  `idshop` int(11) NOT NULL,
   `idcustomer` int(11) NOT NULL,
   `rate` int(11) DEFAULT '0',
   `message` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT '"No information"',
-  PRIMARY KEY (`idservice`,`idcustomer`)
+  PRIMARY KEY (`idshop`,`idcustomer`),
+  CONSTRAINT `FK_RATING_SHOP` FOREIGN KEY (`idshop`) REFERENCES `shop` (`idshop`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -208,6 +188,30 @@ CREATE TABLE `rating` (
 LOCK TABLES `rating` WRITE;
 /*!40000 ALTER TABLE `rating` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rating` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `role` (
+  `idrole` int(11) NOT NULL AUTO_INCREMENT,
+  `rolename` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`idrole`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role`
+--
+
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'Customer'),(2,'Shop owner'),(3,'Deliverer');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -227,10 +231,13 @@ CREATE TABLE `service` (
   `image` varchar(256) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `availability` int(11) DEFAULT '1',
   `totalpurchase` int(11) DEFAULT '0',
+  `idshop` int(11) NOT NULL DEFAULT '10',
   PRIMARY KEY (`idservice`),
   KEY `FK_SERVICE_TYPE_idx` (`idtype`),
   KEY `FK_SERVICE_AVAIL_idx` (`availability`),
+  KEY `FK_SERVICE_SHOP_idx` (`idshop`),
   CONSTRAINT `FK_SERVICE_AVAIL` FOREIGN KEY (`availability`) REFERENCES `serviceavail` (`availability`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_SERVICE_SHOP` FOREIGN KEY (`idshop`) REFERENCES `shop` (`idshop`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_SERVICE_TYPE` FOREIGN KEY (`idtype`) REFERENCES `type` (`idtype`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -241,7 +248,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'Inspection and Sorting','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_sort.jpg',1,0),(2,'Stain removal','\"No information\"',20000,1,0,'/image/cleanings/dry/dry_remove.jpg',1,0),(3,'Dry cleaning','\"No information\"',50000,1,0,'/image/cleanings/dry/dry_clean.jpg',1,0),(4,'Normal temperature Drying','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_dry.jpg',1,0),(5,'Pressing and Finishing','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_press.jpg',1,0),(6,'Packaging','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_package.jpg',1,0),(7,'Inspection and Sorting','\"No information\"',10000,2,0,'/image/cleanings/laundry/laundry_sort.jpg',1,0),(8,'Stain removal','\"No information\"',20000,2,0,'/image/cleanings/laundry/laundry_remove.jpg',1,0),(9,'Washing','\"No information\"',30000,2,0,'/image/cleanings/laundry/laundry_wash.jpg',1,0),(10,'Hot air Drying','\"No information\"',20000,2,0,'/image/cleanings/laundry/laundry_dry.jpg',1,0),(11,'Ironing and Finishing','\"No information\"',10000,2,0,'/image/cleanings/laundry/laundry_iron.jpg',1,0),(12,'Packaging','\"No information\"',10000,2,0,'/image/cleanings/laundry/laundry_package.jpg',1,0),(13,'Inspection and Sorting','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_inspect.jpg',1,0),(14,'Stain removal','\"No information\"',20000,3,0,'/image/cleanings/shoes/shoes_remove.jpg',1,0),(15,'Soft cleaning','\"No information\"',50000,3,0,'/image/cleanings/shoes/shoes_clean.webp',1,0),(16,'Normal temperature Drying','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_dry.jpg',1,0),(17,'Pressing and Finishing','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_press.jpg',1,0),(18,'Packaging','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_package.jpg',1,0),(19,'Inspection and Sorting','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_sort.jpg',1,0),(20,'Stain removal','\"No information\"',20000,5,0,'/image/cleanings/stuffed/stuffed_remove.jpg',1,0),(21,'Soft cleaning','\"No information\"',50000,5,0,'/image/cleanings/stuffed/stuffed_wash.jpg',1,0),(22,'Normal temperature Drying','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_dry.jpg',1,0),(23,'Pressing and Finishing','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_press.jpg',1,0),(24,'Packaging','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_package.jpg',1,0),(25,'Inspection and Preparing tools','\"No information\"',50000,4,0,'/image/cleanings/furniture/furniture_tools.jpg',1,0),(26,'Stain removal','\"No information\"',20000,4,0,'/image/cleanings/furniture/furniture_remove.jpg',1,0),(27,'Surface cleaning','\"No information\"',50000,4,0,'/image/cleanings/furniture/furniture_clean.jpg',1,0),(28,'New coating','\"No information\"',30000,4,0,'/image/cleanings/furniture/furniture_coat.jpg',1,0),(29,'Sanitization','\"No information\"',20000,4,0,'/image/cleanings/furniture/furniture_sanitize.jpg',1,0),(30,'Hot air Drying','\"No information\"',20000,4,0,'/image/cleanings/furniture/furniture_dry.jpg',1,0);
+INSERT INTO `service` VALUES (1,'Inspection and Sorting','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_sort.jpg',1,0,10),(2,'Stain removal','\"No information\"',20000,1,0,'/image/cleanings/dry/dry_remove.jpg',1,0,10),(3,'Dry cleaning','\"No information\"',50000,1,0,'/image/cleanings/dry/dry_clean.jpg',1,0,10),(4,'Normal temperature Drying','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_dry.jpg',1,0,10),(5,'Pressing and Finishing','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_press.jpg',1,0,10),(6,'Packaging','\"No information\"',10000,1,0,'/image/cleanings/dry/dry_package.jpg',1,0,10),(7,'Inspection and Sorting','\"No information\"',10000,2,0,'/image/cleanings/laundry/laundry_sort.jpg',1,0,10),(8,'Stain removal','\"No information\"',20000,2,0,'/image/cleanings/laundry/laundry_remove.jpg',1,0,10),(9,'Washing','\"No information\"',30000,2,0,'/image/cleanings/laundry/laundry_wash.jpg',1,0,10),(10,'Hot air Drying','\"No information\"',20000,2,0,'/image/cleanings/laundry/laundry_dry.jpg',1,0,10),(11,'Ironing and Finishing','\"No information\"',10000,2,0,'/image/cleanings/laundry/laundry_iron.jpg',1,0,10),(12,'Packaging','\"No information\"',10000,2,0,'/image/cleanings/laundry/laundry_package.jpg',1,0,10),(13,'Inspection and Sorting','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_inspect.jpg',1,0,10),(14,'Stain removal','\"No information\"',20000,3,0,'/image/cleanings/shoes/shoes_remove.jpg',1,0,10),(15,'Soft cleaning','\"No information\"',50000,3,0,'/image/cleanings/shoes/shoes_clean.webp',1,0,10),(16,'Normal temperature Drying','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_dry.jpg',1,0,10),(17,'Pressing and Finishing','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_press.jpg',1,0,10),(18,'Packaging','\"No information\"',10000,3,0,'/image/cleanings/shoes/shoes_package.jpg',1,0,10),(19,'Inspection and Sorting','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_sort.jpg',1,0,10),(20,'Stain removal','\"No information\"',20000,5,0,'/image/cleanings/stuffed/stuffed_remove.jpg',1,0,10),(21,'Soft cleaning','\"No information\"',50000,5,0,'/image/cleanings/stuffed/stuffed_wash.jpg',1,0,10),(22,'Normal temperature Drying','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_dry.jpg',1,0,10),(23,'Pressing and Finishing','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_press.jpg',1,0,10),(24,'Packaging','\"No information\"',10000,5,0,'/image/cleanings/stuffed/stuffed_package.jpg',1,0,10),(25,'Inspection and Preparing tools','\"No information\"',50000,4,0,'/image/cleanings/furniture/furniture_tools.jpg',1,0,10),(26,'Stain removal','\"No information\"',20000,4,0,'/image/cleanings/furniture/furniture_remove.jpg',1,0,10),(27,'Surface cleaning','\"No information\"',50000,4,0,'/image/cleanings/furniture/furniture_clean.jpg',1,0,10),(28,'New coating','\"No information\"',30000,4,0,'/image/cleanings/furniture/furniture_coat.jpg',1,0,10),(29,'Sanitization','\"No information\"',20000,4,0,'/image/cleanings/furniture/furniture_sanitize.jpg',1,0,10),(30,'Hot air Drying','\"No information\"',20000,4,0,'/image/cleanings/furniture/furniture_dry.jpg',1,0,10);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,6 +274,35 @@ LOCK TABLES `serviceavail` WRITE;
 /*!40000 ALTER TABLE `serviceavail` DISABLE KEYS */;
 INSERT INTO `serviceavail` VALUES (0,'Available'),(1,'Unavailable');
 /*!40000 ALTER TABLE `serviceavail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shop`
+--
+
+DROP TABLE IF EXISTS `shop`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shop` (
+  `idshop` int(11) NOT NULL,
+  `shopimage` varchar(256) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `shopname` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT 'NO NAME',
+  `shopdescription` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT 'No information',
+  `momoqr` varchar(256) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `bankaccount` varchar(15) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  PRIMARY KEY (`idshop`),
+  CONSTRAINT `FK_SHOP_ACC` FOREIGN KEY (`idshop`) REFERENCES `account` (`idaccount`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shop`
+--
+
+LOCK TABLES `shop` WRITE;
+/*!40000 ALTER TABLE `shop` DISABLE KEYS */;
+INSERT INTO `shop` VALUES (10,NULL,'SUNFLOWER','No information',NULL,NULL);
+/*!40000 ALTER TABLE `shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -310,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-05 23:41:55
+-- Dump completed on 2023-01-09 15:28:56
