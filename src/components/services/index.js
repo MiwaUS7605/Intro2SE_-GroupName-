@@ -8,6 +8,6 @@ const serviceController = require('./ServiceController');
 router.get('/', serviceController.list);
 router.get('/:serviceId', serviceController.details); 
 
-router.post('/:serviceId', serviceController.ratingproduct);  
+// router.post('/:serviceId', serviceController.ratingproduct);  
 module.exports = router;
  

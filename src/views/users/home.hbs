@@ -5,27 +5,27 @@
             <div class="categories__slider owl-carousel">
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="/image/icons/admin7.png">
-                        <h5><a href="#">Convenient</a></h5>
+                        <h5><a>Convenient</a></h5>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="/image/icons/admin8.png">
-                        <h5><a href="#">Fast</a></h5>
+                        <h5><a>Fast</a></h5>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="/image/icons/admin2.png">
-                        <h5><a href="#">Efficient</a></h5>
+                        <h5><a>Efficient</a></h5>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="/image/icons/admin5.png">
-                        <h5><a href="#">Cheap</a></h5>
+                        <h5><a>Cheap</a></h5>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="/image/icons/admin6.png">
-                        <h5><a href="#">Everyday</a></h5>
+                        <h5><a>Everyday</a></h5>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         </div>
     </div>
 </div>
-<!-- Banner End -->
+<!-- Banner End -->--}}
 
 <!-- Latest Product Section Begin -->
 <section class="latest-product spad">
@@ -102,17 +102,18 @@
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Latest Services</h4>
+                    <h4>Suggested Services</h4>
                     <div class="latest-product__slider owl-carousel">
-                        {{#each latest}}
+                        {{!-- {{#each suggest}} --}}
+                        {{#each services}}
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="services/{{idservice}}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/users/img/latest-product/lp-1.jpg" alt="">
+                                    <img src={{image}} alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
+                                    <h6><a href="services/{{idservice}}">{{servicename}}</a></h6>
+                                    <span>{{price}} VNĐ</span>
                                 </div>
                             </a>
                         </div>
@@ -122,17 +123,16 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Top Rated Services</h4>
+                    <h4>Featured Shops</h4>
                     <div class="latest-product__slider owl-carousel">
-                        {{#each top}}
+                        {{#each shops}}
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="shops/{{idshop}}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/users/img/latest-product/lp-1.jpg" alt="">
+                                    <img src={{shopimage}} alt="">
                                 </div>
                                 <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
+                                    <h6><a href="shops/{{idshop}}">{{shopname}}</a></h6>
                                 </div>
                             </a>
                         </div>
@@ -143,4 +143,19 @@
         </div>
     </div>
 </section>
-<!-- Latest Product Section End --> --}}
+<!-- Latest Product Section End --> 
+<br><br>
+<br><br>
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="/image/banner/sunflower1.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <a href="/users/shop-grid"><h2>Filter/Sort Services</h2></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
