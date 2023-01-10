@@ -4,10 +4,17 @@ const mysql = require('mysql2/promise');
 const db = {connection: null};
 
 async function db_connect() {
+  // db.connection = await mysql.createConnection({
+  //   host: 'db4free.net',
+  //   user: 'sunflowerltudweb',
+  //   password: 'tamsotam',
+  //   database: 'db_laundry'
+  // })
+
   db.connection = await mysql.createConnection({
-    host: 'db4free.net',
-    user: 'sunflowerltudweb',
-    password: 'tamsotam',
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
     database: 'db_laundry'
   })
 

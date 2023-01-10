@@ -47,6 +47,25 @@ class CheckoutController {
 
         res.redirect('/');
     }
+
+    async manageOrder(req, res, next) {
+        let email = res.locals.user.email;
+        if (!email) return;
+        const idUser = await authService.getUserIdByEmail(email);
+
+        const orderType = req.query.order;
+        let orders = [];
+        if (orderType) {
+            orders = await checkoutService.sort(idUser['idcustomer'],orderType);
+        }
+        else {
+            orders = await checkoutService.getAllMyOrders(idUser['idcustomer']);
+        }
+        if (!orders) return next(createError(404));
+        const { sort, ...withoutSort } = req.query;
+
+        res.render('users/manage-order',  { orders, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}`});
+    }
 }
 
 module.exports = new CheckoutController;

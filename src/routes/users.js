@@ -39,4 +39,6 @@ router.post('/decrease-quantity', cartController.descQuantity);
 
 router.post('/place-order', checkoutController.placeOrder);
 
+router.get('/manage-order', checkoutController.manageOrder);
+
 module.exports = router;
