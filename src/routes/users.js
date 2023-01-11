@@ -4,6 +4,7 @@ const userController = require('../components/users/UserController');
 const serviceController = require('../components/services/ServiceController');
 const cartController = require('../components/cart/CartController');
 const checkoutController = require('../components/checkout/CheckoutController');
+const shopController = require('../components/shop/ShopController');
 
 /* GET home page. */
 
@@ -16,7 +17,10 @@ router.get('/checkout',checkoutController.displayCheckout);
 router.get('/contact', userController.contact);
 
 /* GET shop detail page. */
-router.get('/shop-details', serviceController.details);
+router.get('/shop-details', shopController.details);
+
+/* GET service detail page. */
+router.get('/service-details', serviceController.details);
 
 /* GET shop grid page. */
 router.get('/shop-grid', serviceController.list);
@@ -34,5 +38,7 @@ router.post('/increase-quantity', cartController.incrQuantity);
 router.post('/decrease-quantity', cartController.descQuantity);
 
 router.post('/place-order', checkoutController.placeOrder);
+
+router.get('/manage-order', checkoutController.manageOrder);
 
 module.exports = router;

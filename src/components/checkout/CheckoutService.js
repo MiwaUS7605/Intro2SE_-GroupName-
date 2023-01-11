@@ -14,6 +14,10 @@ class CheckoutService {
     async getAllMyOrders(userId){
         return checkoutRepository.getallmyorders(userId);
     }
+
+    async sort(userId, idtype) {
+        return checkoutRepository.sorttype(userId, idtype);
+    }
 }
 
 module.exports = new CheckoutService;

@@ -6,10 +6,11 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Shop Details</h2>
+                    <h2>Service Details</h2>
                     <div class="breadcrumb__option">
                         <a href="/home">Home</a>
-                        <span>Shop Details</span>
+                        <a href="/home">Services</a>
+                        <span>Service Details</span>
                     </div>
                 </div>
             </div>
@@ -25,47 +26,61 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
-                        {{!-- <img class="product__details__pic__item--large" src={{shop.shopimage}} alt="/users/img/logo.png"> --}}
-                        <img class="product__details__pic__item--large" src="/users/img/logo.png">
+                        <img class="product__details__pic__item--large" src="{{service.image}}" alt="">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel">
+                        <img data-imgbigurl="img/product/details/product-details-2.jpg" src="/image/icons/user1.png"
+                            alt="">
+                        <img data-imgbigurl="img/product/details/product-details-3.jpg" src="/image/icons/user2.png"
+                            alt="">
+                        <img data-imgbigurl="img/product/details/product-details-5.jpg" src="/image/icons/user5.png"
+                            alt="">
+                        <img data-imgbigurl="img/product/details/product-details-4.jpg" src="/image/icons/user10.png"
+                            alt="">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
-                    <h3>{{shop.shopname}}</h3>
-                    <div class="product__details__rating">
+                    <h3>{{service.servicename}}</h3>
+                    {{!-- <div class="product__details__rating">
                         <span>{{countResult}} reviews</span>
-                    </div>
+                    </div> --}}
+                    <div class="product__details__price">{{service.price}} VND</div>
+                    <p>{{service.typename}}</p>
 
+                    <button onclick="addSer(this.value)" value="{{service.idservice}}" class="primary-btn">ADD TO
+                        CART</button>
                     <ul>
-                        <li><b>Shop Owner</b> <span>{{shop.idshop}}</span></li>
-                        {{!-- <a href="/users/account-info/{{service.idshop}}"></a> --}}
-                        <li><b>Description</b> <span>{{shop.shopdescription}}</span></li>
+                        <li><b>Availability</b> <span>{{service.availability}}</span></li>
+                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                        <li><b>Shop</b> <span><a href="/users/shops/{{service.idshop}}">{{service.idshop}}</a> </span></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="product__details__tab">
                     <ul class="nav nav-tabs" role="tablist">
-                        {{!-- <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-2" role="tab"
-                                aria-selected="true">Description</a>
-                        </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Reviews
-                                <span>({{countResult}})</span></a>
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                aria-selected="true">Description</a>
                         </li>
+                        {{!-- <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="true">Reviews
+                                <span>({{countResult}})</span></a>
+
+                        </li> --}}
                     </ul>
                     <div class="tab-content">
-                        {{!-- <div class="tab-pane active" id="tabs-2" role="tabpanel">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Shop Information</h6>
-                                <p>{{shop.shopdescription}}</p>
+                                <h6>Products Information</h6>
+                                <p>{{service.description}}</p>
                             </div>
-                        </div> --}}
-                        <div class="tab-pane" id="tabs-1" role="tabpanel">
+                        </div>
+                        {{!-- <div class="tab-pane" id="tabs-2" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Shop Reviews</h6>
+                                <h6>Products Reviews</h6>
                                 <p>{{countResult}} reviews</p>
 
                                 {{#each ratings}}
@@ -75,7 +90,7 @@
                                 </div>
                                 {{/each}}
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -86,8 +101,7 @@
 
 
 <!-- Contact Form Begin -->
-{{#if user}}
-<div class="contact-form spad">
+{{!-- <div class="contact-form spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -115,15 +129,13 @@
 
                 <div class="col-lg-12 text-center">
                     <textarea name="message" placeholder="Your message"></textarea>
-                    <button type="submit" class="site-btn" name="idshop" 
-                            value="{{shop.idshop}}" onclick="processRating(this.value)">SEND REVIEW</button>
+                    <button type="submit" class="site-btn" name="idservice" 
+                            value="{{service.idservice}}">SEND REVIEW</button>
                 </div>
             </div>
         </form>        
     </div>
-</div>
-<br><br>
-{{/if}}
+</div> --}}
 <!-- Contact Form End -->
 
 <!-- Related Product Section Begin -->
@@ -132,7 +144,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title related__product__title">
-                    <h2>Shop's Services</h2>
+                    <h2>Related Services</h2>
                 </div>
             </div>
         </div>
