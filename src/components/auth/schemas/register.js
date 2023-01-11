@@ -6,7 +6,8 @@ module.exports = {
     password: { type: 'string', 'minLength': 6 },
     confirmpassword: { type: 'string', 'minLength':6},
     phonenumber: {type: 'string', 'minLength':10},
-    address: { type: 'string', 'maxLength':256}
+    address: { type: 'string', 'maxLength':256},
+    role: {type: 'string'}
   },
   required: ['name', 'email', 'password','confirmpassword','phonenumber'],
   additionalProperties: false,
