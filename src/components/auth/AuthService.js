@@ -8,12 +8,12 @@ class AuthService {
     return authRepository.getUserIdByEmail(email);
   }
   
-  async register(name, phonenumber, address, email, password) {
+  async register(name, phonenumber, address, email, role, password) {
     if (await authRepository.emailExists(email))
       throw new Error('Email exists!');
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    return authRepository.insertUser(name, phonenumber, address, email, hash);
+    return authRepository.insertUser(name, phonenumber, address, email, role, hash);
   }
 
   async checkUserCredential(email, password) {
