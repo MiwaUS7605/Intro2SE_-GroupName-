@@ -11,17 +11,17 @@ class CheckoutController {
         const idUser = await authService.getUserIdByEmail(email);
 
         //Get the cart first when the order has not been processed
-        let services = await laundryService.getcart(idUser['idcustomer']);
+        let services = await laundryService.getcart(idUser['idaccount']);
         
         //The cart empty when the order has been processed,
         //and get the latest processed order
         if (services.length == 0) {
-            services = await checkoutService.getLatestOrder(idUser['idcustomer']);
+            services = await checkoutService.getLatestOrder(idUser['idaccount']);
             // console.log("You have process order before!");
         }
         var sub_total = await laundryService.getSubtotal(services);
 
-        let orders = await checkoutService.getAllMyOrders(idUser['idcustomer']);
+        let orders = await checkoutService.getAllMyOrders(idUser['idaccount']);
 
         res.render('users/checkout', { services, sub_total, orders});
     }
@@ -32,7 +32,7 @@ class CheckoutController {
         const idUser = await authService.getUserIdByEmail(email);
         
         let services = [];
-        services = await laundryService.getcart(idUser['idcustomer']);
+        services = await laundryService.getcart(idUser['idaccount']);
         
         //Empty cart
         if (!services) return next(createError(404));
@@ -56,10 +56,10 @@ class CheckoutController {
         const orderType = req.query.order;
         let orders = [];
         if (orderType) {
-            orders = await checkoutService.sort(idUser['idcustomer'],orderType);
+            orders = await checkoutService.sort(idUser['idaccount'],orderType);
         }
         else {
-            orders = await checkoutService.getAllMyOrders(idUser['idcustomer']);
+            orders = await checkoutService.getAllMyOrders(idUser['idaccount']);
         }
         if (!orders) return next(createError(404));
         const { sort, ...withoutSort } = req.query;
