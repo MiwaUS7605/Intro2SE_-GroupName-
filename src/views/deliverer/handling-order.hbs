@@ -1,0 +1,44 @@
+<div class="container vertical-scrollable text-left scrollBox">
+    {{#each orders}}
+    <div class="row">
+        <div class="col-sm-10 mx-auto">
+            <div class="container row mb-5 scroll-item" id={{idorder}}>
+                <div class="col-sm-4 me-5 ">
+                    <h3>Customer</h3>
+                    <h5 class="partition-header">Name: </h5><span> {{name}}</span>
+                    <h5 >Address:<span> {{address}}</span>
+                    <h5>Phone: <span> {{phonenumber}}</span>
+                    <h5 class="partition-header">Email: <span> {{email}}</span>
+                </div>
+                <div class="col-sm-4 me-5">
+                    <h3>Shop</h3>
+                    <h5 class="partition-header">Shop name: <span> {{shopname}}</span>
+                    <h5>Address: <span> {{shopaddress}}</span>
+                    <h5>Phone: <span> {{shopphonenumber}}</span>
+                    <h5>Email:<span> {{shopemail}}</span>
+                </div>
+                <div class="col-sm-4 me-5">
+                    <div class="row">
+                        <div class="col-9">
+                            <h3>Orders</h3> 
+                        </div>
+                        <div class="col-2">
+                            <button value={{idorder}} onclick="cancelOrder(this.value)" class="cancel-btn">Cancel</button>
+                        </div>
+                    </div>
+                    <h5>Price:<span> {{totalprice}}</span>
+                    <h5>Delivery free:<span> {{shipfee}}</span>
+                    <div><span><br></span></div>
+                    {{#if isCollecting}}
+                        <button class="accept-button" value={{idorder}} onclick="processOrder(this.value)">Complete collecting</button>
+                    {{else if isDelivering}}
+                         <button class="accept-button" value={{idorder}} onclick="completeOrder(this.value)">Complete delivering</button>
+                    {{else }}
+                        <button class="accept-button" disabled >Complete delivering</button>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
