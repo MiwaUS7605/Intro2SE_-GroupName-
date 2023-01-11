@@ -88,6 +88,14 @@ class CheckoutRespository {
         const result = await db.connection.execute(query_str, [userId]);
         return result[0];
     }
+
+    async sorttype(userId, idtype) {
+        //Using prepare statement to avoid SQL injection
+        let query_str = 'select * from `order` as o join `orderstatus` as os on o.status = os.idstatus\
+                        where o.idcustomer = ? and o.status = ? ';
+        const result = await db.connection.execute(query_str, [userId, idtype]);
+        return result[0];
+    }
 }
 
 module.exports = new CheckoutRespository;

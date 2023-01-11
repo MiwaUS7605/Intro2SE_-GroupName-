@@ -8,7 +8,8 @@ const orderListController = require('../components/orderList/OrderListController
 
 router.get('/', adminController.dashboard);
 router.get('/dashboard', adminController.dashboard);
-router.get('/revenue', adminController.revenue);
+// router.get('/revenue', adminController.revenue);
+router.get('/shop-info', adminController.shopInfo);
 router.get('/chat', adminController.chat);
 router.get('/feedback', adminController.feedback);
 router.get('/google-map', adminController.location);

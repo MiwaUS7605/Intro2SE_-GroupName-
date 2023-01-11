@@ -2,6 +2,7 @@ const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
 
 const shopRepo = require('./ShopRepository');
+const authService = require('../auth/AuthService');
 
 const createError = require('http-errors');
 const qs = require('qs');
@@ -29,18 +30,18 @@ class ShopController {
         res.render('users/shop-details', { shop, products, ratings, countResult});
     }
 
-    async ratingshop(req, res) {
+    async ratingshop(req, res, next) {
         try{ 
             const { rate, message, idshop } = req.body;
-
-            console.log(rate, message, idshop);
             
             let email = res.locals.user.email;
-            //if (!email) return;
+            if (!email) return;
             
             const iduser = await authService.getUserIdByEmail(email);
-            await shopRepo.rating(rate,message,idshop,iduser['idcustomer']);
+            await shopRepo.rating(rate,message,idshop,iduser['idaccount']);
             console.log(iduser);
+            
+            res.redirect(`users/shops/${qs.stringify(idshop)}`);
         }catch(e){
             console.log(e.message);
             return;

@@ -13,7 +13,7 @@ class CartController {
             const idUser = await authService.getUserIdByEmail(email);
             
             let services = [];
-            services = await laundryService.getcart(idUser['idcustomer']);
+            services = await laundryService.getcart(idUser['idaccount']);
     
             if (!services) return next(createError(404));
             console.log(services);
@@ -41,9 +41,9 @@ class CartController {
             if (!idService) return;
     
             const idUser = await authService.getUserIdByEmail(email);
-            const serviceFromUser = await laundryService.getServiceFromUser(idUser['idcustomer'], idService);
+            const serviceFromUser = await laundryService.getServiceFromUser(idUser['idaccount'], idService);
             if (!serviceFromUser) {
-                await laundryService.addtocart(idUser['idcustomer'], idService);
+                await laundryService.addtocart(idUser['idaccount'], idService);
                 message = "Successfully!";
             }
 
@@ -71,7 +71,7 @@ class CartController {
 
         const idUser = await authService.getUserIdByEmail(email);
         
-        await laundryService.removefromcart(idUser['idcustomer'], idService);
+        await laundryService.removefromcart(idUser['idaccount'], idService);
         
         res.json({message: message});
     }
@@ -85,7 +85,7 @@ class CartController {
         
         const idUser = await authService.getUserIdByEmail(email);
         
-        await laundryService.incrQuantity(idUser['idcustomer'], idService);
+        await laundryService.incrQuantity(idUser['idaccount'], idService);
     }
 
     async descQuantity(req, res, next) {
@@ -97,7 +97,7 @@ class CartController {
 
         const idUser = await authService.getUserIdByEmail(email);
         
-        await laundryService.descQuantity(idUser['idcustomer'], idService);
+        await laundryService.descQuantity(idUser['idaccount'], idService);
     }
 
 }

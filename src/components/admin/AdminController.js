@@ -1,11 +1,23 @@
+const adminService = require('./AdminService');
+
 class AdminController {
     //[GET] /
     dashboard(req,res) {
         res.render('admin/dashboard', {layout: 'admin-layout'});
     }
     //[GET] /admin/revenue
-    revenue(req, res) {
-        res.render('admin/revenue', {layout: 'admin-layout'});
+    // revenue(req, res) {
+    //     res.render('admin/revenue', {layout: 'admin-layout'});
+    // }
+    async shopInfo(req, res) {
+        // if(!req.user)
+        // {
+        //     res.redirect('user/auth/login');
+        //     return;
+        // }
+        let shopId = 10;
+        const receivedRes = await adminService.getShopInfor(shopId);
+        res.render('admin/shop-infor', {layout: 'admin-layout', receivedRes});
     }
     //[GET] /admin/list
     history(req, res) {

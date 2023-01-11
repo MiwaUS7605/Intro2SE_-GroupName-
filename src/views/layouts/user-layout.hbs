@@ -63,6 +63,7 @@
                 {{!-- <li><a href="/users/shop-grid">Shop</a></li> --}}
                 <li><a href="/users/shopping-cart">Cart</a></li>
                 <li><a href="/users/checkout">Check Out</a></li>
+                <li><a href="/users/manage-order">Manage Order</a></li>
                 {{/if}}
                 {{!-- <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -314,7 +315,7 @@
                 datatype: "json",
                 data: { page: page },
                 success: function (data, textStatus, jqXHR) {
-                    alert(data.message);
+                    //alert(data.message);
                     $("#service-partial").empty().append($(data).find("#service-partial").children());
                     $("#paginator-items").empty().append($(data).find("#paginator-items").children());
                 },
@@ -402,33 +403,33 @@
                 $("#pre-checkout").empty().append($(data).find("#pre-checkout").children());
             });
         }
+{{!-- 
+        function processRating(idshop) {
+            const rate = $('input[name='rate']:checked').val();
+            const comment = $('textarea#message').val();
+            console.log(rate);
+            $.ajax({
+                url: '/users/rating',
+                method: 'post',
+                data: { rate:rate, 
+                        comment:comment, 
+                        idshop:idshop },
+                dataType: 'json',
+                success: function (data) {
+                    alert("Comment successfully!!");
+                },
+                error: function (data) {
+                    alert("Comment failed...");
+                }
+            });
+            $.get(location.href, function (data) {
+                $("#shop-details").empty().append($(data).find("#shop-details").children());
+            });
 
-        //function processRating(idservice) {
-        //    const rate = $('input[name='rate']:checked').val();
-        //    const comment = $('textarea#message').val();
-        //    console.log(rate);
-        //    $.ajax({
-        //        url: '/users/rating',
-        //        method: 'post',
-        //        data: { rate:rate, 
-        //                comment:comment, 
-        //                idservice:idservice },
-        //        dataType: 'json',
-        //        success: function (data) {
-        //            alert("Comment successfully!!");
-        //        },
-        //        error: function (data) {
-        //            alert("Comment failed...");
-        //        }
-        //    });
-        //    $.get(location.href, function (data) {
-        //        $("#product-details").empty().append($(data).find("#product-details").children());
-        //    });
-//
-        //    $.get(location.href, function (data) {
-        //        $("#rating-section").empty().append($(data).find("#rating-section").children());
-        //    });
-        //}
+            $.get(location.href, function (data) {
+                $("#rating-section").empty().append($(data).find("#rating-section").children());
+            });
+        } --}}
     </script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"

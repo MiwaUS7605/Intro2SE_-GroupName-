@@ -18,10 +18,10 @@ class AuthRepository {
     }
 
     async edit(nname, nphonenumber, naddress, npassword, user) {
-        await db.connection.execute('update `account` set `name` = ?, `phonenumber` = ?, `address` = ?, `password` = ?\
-                                    where `email` = ?', [nname,nphonenumber,naddress,npassword, user.email]);
+        const result = await db.connection.execute('select * from account where email = ? limit 1', [email]);
+        return result[0] && result[0][0];
     }
-
+    
     async getUserIdByEmail(email) {
         const result = await db.connection.execute('select idaccount from `account` where email = ? limit 1', [email]);
         return result[0] && result[0][0];
