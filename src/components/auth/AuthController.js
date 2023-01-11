@@ -31,6 +31,8 @@ class AuthController{
     }
 
     async showEditForm(req,res){
+      console.log("user infor:");
+      console.log(req.user);
       // const user = await authService.getUserByEmail(req.user.email);
       res.render('account/edit');
     }
