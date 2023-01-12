@@ -52,8 +52,8 @@ class CheckoutRespository {
         console.log(checkoutForm['address-1']);
         console.log(cart[0]['idcustomer']);
 
-        let query_str = "insert into `order` (idcustomer, totalprice, address, phonenumber) \
-                        values (?,?,?,?)";
+        let query_str = "insert into `order` (idcustomer, totalprice, address, phonenumber, idshop) \
+                        values (?,?,?,?,10)";
         await db.connection.execute(query_str, [cart[0]['idcustomer'],
             totalprice,
             checkoutForm['address-1'],
