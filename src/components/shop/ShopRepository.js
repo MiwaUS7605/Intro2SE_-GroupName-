@@ -26,12 +26,11 @@ class ShopRepository {
                                     values (?,?,?,?)', [rate, message, idshop, idcustomer]);
     }
 
-    async getNumber(shopId, number){
+    async getSer(shopId){
         let query_str = 'select se.image, se.idservice, se.servicename, se.price \
                         from `shop` as s join `service` as se on s.idshop = se.idshop\
-                        where se.idshop = ?\
-                        limit ?';
-        const result = await db.connection.execute(query_str, [shopId, number]);
+                        where se.idshop = ?';
+        const result = await db.connection.execute(query_str, [shopId]);
         return result[0];
     }
 }

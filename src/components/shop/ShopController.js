@@ -19,15 +19,15 @@ class ShopController {
         console.log('shop', shop);
         if (!shop) return next(createError(404));
 
-        // let products = [];
-        // products = await shopRepo.getNumber(shopId, 4);
-        // if (!products) return next(createError(404));
+        let products = [];
+        products = await shopRepo.getSer(shopId);
+        if (!products) return next(createError(404));
 
         let ratings = [];
         ratings = await shopRepo.getrating(shopId);
         const countResult = Object.keys(ratings).length;
         
-        res.render('users/shop-details', { shop, ratings, countResult});
+        res.render('users/shop-details', { shop, ratings, products, countResult});
     }
 
     async ratingshop(req, res, next) {
@@ -41,7 +41,7 @@ class ShopController {
             await shopRepo.rating(rate,message,idshop,iduser['idaccount']);
             console.log(iduser);
             
-            res.redirect(`users/shops/${qs.stringify(idshop)}`);
+            res.redirect(`/users/shops/${idshop}`);
         }catch(e){
             console.log(e.message);
             return;
