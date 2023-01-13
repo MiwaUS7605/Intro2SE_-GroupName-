@@ -2,6 +2,7 @@ const laundryService = require('../cart/LaundryService');
 const checkoutService = require('./CheckoutService');
 const authService = require('../auth/AuthService');
 const createError = require('http-errors');
+const qs = require('qs');
 
 class CheckoutController {
 
