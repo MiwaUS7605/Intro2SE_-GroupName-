@@ -4,7 +4,7 @@
             <div class="col-2"></div>
             <div class="col-xl-3">
                 {{#if receivedRes.shopimage}}
-                    <img src="/image/banner/{{receivedRes.shopimage}}" alt="shop-img" width="300" height="300">
+                    <img src="{{receivedRes.shopimage}}" alt="shop-img" width="300" height="300">
                 {{else}}
                     <img src="/image/banner/no_image.jpg" alt="shop-img" width="300" height="300">
                 {{/if}}
@@ -14,7 +14,7 @@
                 <div>&nbsp;</div>
                 <div class="row">
                 <span class="col-md-4"><h4>Shop owner:</h4></span>
-                <span class="col-md-8"><a href="">{{receivedRes.name}}</a></span>    
+                <span class="col-md-8"><a href="edit-profile">{{receivedRes.name}}</a></span>    
                 </div>
                 &nbsp;
                 <div class="row">
@@ -25,7 +25,7 @@
                 <div class="row d-float-end">
                     <span class="col-4"></span>
                     <span class="col-2 justify-content-">
-                        <button class="update-button-shop-infor">Update</button>
+                        <button class="update-button-shop-infor"><a href="/admin/edit-shop-infor">Update</a></button>
                     </span>
                 </div>
             </div>

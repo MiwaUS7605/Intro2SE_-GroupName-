@@ -1,0 +1,99 @@
+<div class="container-fluid text-center">
+    <div class="row">
+        <h2 class="col-12">UPDATE SERVICES</h2>
+    </div>
+
+    <div class="container mt-0">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-xl-10">
+                <form method="POST" id="update-service-form" class="p-3 p-md-5" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <div class="card-body">
+                                <div class="crm-profile-img-edit position-relative">
+                                    {{#if shopInfor.shopimage}}
+                                    <img class="crm-profile-pic avatar-100 edit-shop-infor-img"
+                                        src="{{shopInfor.shopimage}}"> 
+                                        {{else}} 
+                                    <img
+                                        class="crm-profile-pic avatar-100 edit-shop-infor-img"
+                                        src="/image/banner/no_image.jpg" alt="profile-pic">
+                                    {{/if}}
+                                    <label for="update-img">Update image</label>
+                                    <input type="file" name="shop-img" id="shop-img">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-2"></div>
+                                    <div class="crm-profile-img-edit position-relative text-center col-xl-8">
+                                        {{#if shopInfor.shopimage}}
+                                        <img class="crm-profile-pic avatar edit-shop-infor-momo-qr"
+                                            src="{{shopInfor.momoqr}}">
+                                        {{else}}
+                                        <img class="crm-profile-pic avatar-100 edit-shop-infor-momo-qr"
+                                            src="/image/banner/no_image.jpg" alt="profile-pic">
+                                        {{/if}}
+                                        <label for="update-img">MoMo QR</label>
+                                        <input type="file" name="momo-qr" id="momo-qr">
+                                    </div>
+                                    <div class="col-xl-2"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-xl-6 ftco-animate fadeInUp ftco-animated text-start">
+                            <div class="row align-items-end">
+                                <div class="col-md">
+                                    <div class="form-group">
+                                        <label for="shop-name">Shop Name:</label>
+                                        <input type="text" class="form-control" placeholder="" name="updatename"
+                                            value="{{shopInfor.shopname}}" id="shop-name">
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="w-100"></div>
+                                <div class="col-md">
+                                    <div class="form-group">
+                                        <label for="update-description">Description</label>
+                                        <input type="text" class="form-control" placeholder="" name="updatedescription"
+                                            value="{{shopInfor.shopdescription}}" id="update-description">
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="w-100"></div>
+                                <div class="col-md">
+                                    <div class="form-group">
+                                        <label for="update-bank">Bank account number:</label>
+                                        <input type="text" class="form-control" placeholder="" name="updatebank"
+                                            value="{{shopInfor.bankaccount}}" id="update-bank">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="w-100"></div>
+                            <div>&nbsp;</div>
+                            <div class="row mt">
+                                <div class="col-2"></div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="submit" class="form-control edit-shop-infor-button" id="submit"
+                                            value="Update">
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="w-100"></div>
+                            {{#if error}}
+                            <div class="col-md-8">{{error}}</div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </form><!-- END -->
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+</div>

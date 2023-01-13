@@ -7,3 +7,18 @@ exports.getShopInfor = async(_shopInfor) =>
     const res = await db.connection.execute(query_string, [_shopInfor]);
     return res[0];
 }
+
+exports.updateShopInfor = async(shopId, shopImgLink, shopName, shopDes, shopMomo, shopBank) =>
+{
+    try
+    {
+        const query_string = 'UPDATE shop SET shop.shopimage = ?, shop.shopname = ?, shop.shopdescription = ?, shop.momoqr = ?, shop.bankaccount = ? WHERE shop.idshop = ?';
+        await db.connection.execute(query_string, [shopImgLink, shopName, shopDes, shopMomo, shopBank, shopId]);
+        return true;
+    }
+    catch(e)
+    {
+        console.log(e);
+        return false;
+    }
+}

@@ -10471,3 +10471,49 @@ tr td:first-child:before
 {
   word-wrap: break-word;
 }
+
+
+.edit-shop-infor-img
+{
+  width: 300px;
+  height: 300px;
+  border-radius: 1cm;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.edit-shop-infor-button
+{
+  border-radius: 5cm;
+  background-color: greenyellow;
+  border-color: transparent;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 900;
+}
+
+.edit-shop-infor-button:hover
+{
+  background-color: green;
+  color: white;
+  width: 110%;
+  height: 105%;
+}
+
+.edit-shop-infor-button>a
+{
+  color: black;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 900;
+}
+
+.edit-shop-infor-button>a:hover
+{
+  color: white  ;
+}
+
+.edit-shop-infor-momo-qr
+{
+  width: 150px;
+  height: 150px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  
+}

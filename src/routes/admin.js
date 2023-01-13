@@ -6,12 +6,72 @@ const customerListController=require('../components/customerList/CustomerListCon
 const serviceListController = require('../components/serviceList/ServiceListController');
 const orderListController = require('../components/orderList/OrderListController');
 
+
+const multer = require('multer');
+const path = require('path');
+
+const storageSetting = multer.diskStorage( //multer disk storage setting
+{
+    destination: function(req, file, cb)
+    {
+        cb(null, path.join(__dirname, '../public/image/upload/'));
+    },
+    filename: function(req, file, cb)
+    {
+        // const datetimestamp = Date.now();
+        if(file.fieldname === 'shop-img')
+        {
+            cb(null, req.user.id.toString(10) + '_shopImg' + '.' + file.originalname.split('.')[file.originalname.split('.').length-1]);
+        }
+        else if(file.fieldname === 'momo-qr')
+        {
+            cb(null, req.user.id.toString(10) + '_momoQr' + '.' + file.originalname.split('.')[file.originalname.split('.').length-1]);
+        }
+    }
+}
+);
+
+
+// multer setting for pictures/avatars upload
+//reference: https://stackoverflow.com/questions/38652848/filter-files-on-the-basis-of-extension-using-multer-in-express-js
+//note: user can upload file.jpg, file.png, file.svg, file.jpeg for pictures
+const uploadPicture = multer({
+    storage: storageSetting,
+    fileFilter: function(req, file, callback)
+    {
+        const fileExtension = path.extname(file.originalname);
+        if((fileExtension !== '.png' ) && (fileExtension !== '.svg') && (fileExtension !== '.jpg') && (fileExtension !== '.jpeg'))
+        {
+            return callback(new Error('Only images allowed'));
+        }
+        callback(null, true); 
+    },
+    limits: {
+        fileSize: 1024 * 1024
+    }
+}).fields(
+    [
+        {
+            name: 'shop-img',
+            maxCount: 1
+        },
+        {
+            name: 'momo-qr',
+            maxCount: 1
+        }
+    ]
+);
+
+
+
 router.get('/', adminController.dashboard);
 router.get('/dashboard', adminController.dashboard);
 // router.get('/revenue', adminController.revenue);
 router.get('/shop-info', adminController.shopInfo);
+router.get('/edit-shop-infor', adminController.showEditShopInfor);
+router.post('/edit-shop-infor', uploadPicture, adminController.editShopInfor)
 router.get('/chat', adminController.chat);
-router.get('/feedback', adminController.feedback);
+router.get('/feedback', adminController.feedback); 
 router.get('/google-map', adminController.location);
 router.get('/signin', adminController.signin);
 router.get('/edit-profile', adminController.editprofile);
