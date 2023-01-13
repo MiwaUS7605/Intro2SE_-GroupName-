@@ -1,20 +1,19 @@
-const delivererRepo=require('./DelivererRepository');
-//const jsFunc=require('../.././public/deliverer/js/acceptOrder')
+const delivererRepo=require('./DelivererRepository');  
 
 const createError = require('http-errors');
 const qs = require('qs');
 
-class DelivererRepository{
+class DelivererController{
     //get method
     async showAvailableOrder(req,res,next){
+
         const orders= await delivererRepo.getAvailableOrder();
         res.render('deliverer/available-order',{layout:'deliverer-layout',orders});
     }
 
     async showHandlingOrder(req,res,next){
-        //const iddeliverer=res.locals.user.idaccount;
-        const orders=await delivererRepo.getHandlingOrders(200);
-        console.log(orders);
+        const iddeliverer=res.locals.user.id;
+        const orders=await delivererRepo.getHandlingOrders(iddeliverer);
         for(let i=0;i<orders.length;i++){
             if(orders[i].statusname === 'Collecting')
                 orders[i].isCollecting=true;
@@ -22,32 +21,40 @@ class DelivererRepository{
                 orders[i].isDelivering=true;
         }
         
-        console.log(orders);
         res.render('deliverer/handling-order',{layout:'deliverer-layout',orders});
     }
 
-    async showCompletedOrder(req,res,next){
-        //const iddeliverer=res.locals.user.idaccount;
-        const orders=await delivererRepo.getCompletedOrders(200);
+    async showCompletedOrder(req,res,next){ 
+        const iddeliverer=res.locals.user.id;
+        const orders=await delivererRepo.getCompletedOrders(iddeliverer);
         res.render('deliverer/completed-order',{layout:'deliverer-layout', orders});
     }
 
-
     //post method
     async acceptOrder(req,res,next){
-        const idorder=req.body.idorder;
-        //const iddeliverer=res.locals.user.idaccount;
-        try{
-            await delivererRepo.acceptOrder(idorder,200);
-            res.json({status:true});
-        }catch(e){
-            res.redirect(req.get('referer'));
-        }   
+        
+        if (res.locals.user){
+            const idorder=req.body.idorder;
+            if (await delivererRepo.checkDelivererExist(idorder))
+            {
+                res.redirect(req.get('referer'));
+                return;
+            }
+            const iddeliverer=res.locals.user.id;
+            try{
+                await delivererRepo.acceptOrder(idorder,iddeliverer);
+                res.json({status:true});
+            }catch(e){
+                res.redirect(req.get('referer'));
+            }   
+        }
+        else{
+            res.json({status:false});
+        }
     }
 
     async cancelOrder(req,res,next){
         const idorder=req.body.idorder;
-        //const iddeliverer=res.locals.user.idaccount;
         try{
             await delivererRepo.cancelOrder(idorder);
             res.json({status:true});
@@ -58,7 +65,6 @@ class DelivererRepository{
 
     async processOrder(req,res,next){
         const idorder=req.body.idorder;
-        //const iddeliverer=res.locals.user.idaccount;
         try{
             await delivererRepo.processOrder(idorder);
             res.json({status:true});
@@ -69,7 +75,6 @@ class DelivererRepository{
 
     async completeOrder(req,res,next){
         const idorder=req.body.idorder;
-        //const iddeliverer=res.locals.user.idaccount;
         try{
             await delivererRepo.completeOrder(idorder);
             res.json({status:true});
@@ -78,4 +83,4 @@ class DelivererRepository{
         }   
     }
 }
-module.exports =new DelivererRepository;
+module.exports =new DelivererController;
