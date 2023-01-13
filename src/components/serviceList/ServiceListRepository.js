@@ -107,9 +107,9 @@ class ServiceListRepository {
         return result[0]; 
     }
 
-    async updateService(idService,nameService,typeService,descriptionService,priceService){
-        await db.connection.execute('update `service` set servicename=?,price=?,idtype=?,description=? \
-                                    where idservice=?', [nameService,priceService,typeService,descriptionService,idService]);
+    async updateService(idService,nameService,typeService,descriptionService,priceService, imageService){
+        await db.connection.execute('update `service` set servicename=?,price=?,idtype=?,description=?, image=? \
+                                    where idservice=?', [nameService,priceService,typeService,descriptionService,imageService,idService]);
 
     }
 }

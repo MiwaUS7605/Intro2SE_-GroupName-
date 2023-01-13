@@ -8,6 +8,19 @@ const createError = require('http-errors');
 const qs = require('qs');
 const Paginator = require('paginator');
 
+const fs = require('fs');
+const path = require('path');
+
+const validExtension_ofPictures = 
+{
+    _png: '.png',
+    _jpg: '.jpg',
+    _jpeg: '.jpeg',
+    _svg: '.svg'
+}
+
+const uploadPath = path.join(__dirname, '../../public/image/cleanings/upload/');
+
 const ajv = new Ajv();
 addFormats(ajv);
 
@@ -55,13 +68,41 @@ class ServiceListController {
                 price: priceService,
                 type: typeService,
                 description: descriptionService, 
-                imageLink: imageLinkService,
+                //imageLink: imageLinkService,
                 submit: typeSubmit
                 }=req.body;   
 
+        const serviceId = req.query.idservice;
+        const shopId = req.user.id;
         try{
+            let imageLinkService = null;
+            if(fs.existsSync(uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._jpeg) === true)
+            {
+                imageLinkService = uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._jpeg;
+            }
+            else if(fs.existsSync(uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._jpg) === true)
+            {
+                imageLinkService = uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._jpg;
+            }
+            else if(fs.existsSync(uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._png) === true)
+            {
+                imageLinkService = uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._png;
+            }
+            else if(fs.existsSync(uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._svg) === true)
+            {
+                imageLinkService = uploadPath+shopId+'_s'+serviceId+'_serviceImg'+validExtension_ofPictures._svg;
+            }
+
             if (imageLinkService){
-                await serviceListRepo.insertImage(imageLinkService,req.query.idservice); 
+                let start = imageLinkService.indexOf('public');
+                start = imageLinkService.indexOf('\\', start);
+                imageLinkService = imageLinkService.substring(start);
+
+                while(imageLinkService.includes('\\'))
+                {
+                    imageLinkService = imageLinkService.replace('\\','/');
+                }
+                // await serviceListRepo.insertImage(imageLinkService,req.query.idservice); 
             }
             if (nameService||typeService||descriptionService||priceService){
                 const service =await serviceRepo.getService(req.query.idservice);
@@ -70,7 +111,7 @@ class ServiceListController {
                 descriptionService=descriptionService? descriptionService : service.description;
                 priceService=priceService? priceService : service.price;
 
-                await serviceListRepo.updateService(req.query.idservice,nameService,typeService,descriptionService,priceService);
+                await serviceListRepo.updateService(req.query.idservice,nameService,typeService,descriptionService,priceService, imageLinkService);
                 if (typeSubmit=="add"){
                     res.redirect(req.get('referer'));
                 } 
@@ -79,6 +120,7 @@ class ServiceListController {
                 }
             }
         }catch(e){
+            console.log(e);
             res.redirect(`/edit?idservice=${req.query.idservice}`);
             return;
         }

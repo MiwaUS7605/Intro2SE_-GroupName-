@@ -68,6 +68,7 @@ exports.updateShopInfor = async(shopId, shopName, shopDes, shopBank) =>
         shopMomo_path = uploadPath+shopId+'_momoQr'+validExtension_ofPictures._svg;
     }
 
+    //fit the absolute path -> (public) /image/...
     if(shopImg_path != null)
     {
         let start = shopImg_path.indexOf('public');

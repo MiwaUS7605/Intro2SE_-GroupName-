@@ -55,8 +55,9 @@
                     <table class="table no-wrap">
                         <thead>
                             <tr>
-                                <th class="auto-index border-top-0">No.</th>
+                                {{!-- <th class="auto-index border-top-0">No.</th> --}}
                                 <th class="border-top-0">ID</th>
+                                <th class="border-top-0">Image</th>
                                 <th class="border-top-0">Name</th>
                                 <th class="border-top-0">Price</th>
                                 <th class="border-top-0">Type</th>
@@ -72,8 +73,9 @@
 
                             
                                 <tr class='clickable-row'  value="{{idservice}}" data-href='/admin/service-list/edit?idservice={{idservice}}'>
-                                    <td></td>
+                                    {{!-- <td></td> --}}
                                     <td>{{idservice}}</td>
+                                    <td><img src="{{image}}" alt="service image" class="shop-service-img"></td>
                                     <td class="txt-oflo">{{servicename}}</td>
                                     <td>{{price}}</td>
                                     <td class="txt-oflo">{{typename}}</td>

@@ -10525,3 +10525,10 @@ tr td:first-child:before
   font-size: 1.5em;
   word-wrap: break-word;
 }
+
+.shop-service-img
+{
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}

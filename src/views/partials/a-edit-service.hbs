@@ -1,4 +1,4 @@
-<form  action="" method="post" class="create-form spad">
+<form  action="" method="post" class="create-form spad" enctype="multipart/form-data">
     <section>
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -38,7 +38,7 @@
                                             <div class="form-outline mb-4">
                                                 <select name="type" class="form-select shadow-none border-top">
                                                     <option value="0">Choose type</option>
-                                                    <option value="1">Dry cleaning</option>
+                                                    <option value="1" selected>Dry cleaning</option>
                                                     <option value="2">Laundry cleaning</option>
                                                     <option value="3">Shoes cleaning</option>
                                                     <option value="4">Furniture cleaning</option>
@@ -92,7 +92,7 @@
                                                             <tr>
 
                                                                 <td><input class="row-data form-control rounded-0"
-                                                                        type="text" id="imageLink" name="imageLink"
+                                                                        type="file" id="imageLink" name="imageLink"
                                                                         placeholder="image link"></td>
                                                                 <td><button type="submit" class="btn site-btn rounded-0"
                                                                         id="deleteRow" name="submit" value="add">Add</button>
