@@ -97,7 +97,7 @@ class AdminController {
         }
         else
         { 
-            res.redirect('.');
+            res.redirect('edit-shop-infor');
         }
     }
 }

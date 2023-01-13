@@ -21,7 +21,8 @@
                                         src="/image/banner/no_image.jpg" alt="profile-pic">
                                     {{/if}}
                                     <label for="update-img">Update image</label>
-                                    <input type="file" name="shop-img" id="shop-img">
+                                    <input type="file" name="shop-img" id="edit-shop-img">
+                                    
                                 </div>
 
                                 <div class="row">
@@ -35,7 +36,7 @@
                                             src="/image/banner/no_image.jpg" alt="profile-pic">
                                         {{/if}}
                                         <label for="update-img">MoMo QR</label>
-                                        <input type="file" name="momo-qr" id="momo-qr">
+                                        <input type="file" name="momo-qr" id="edit-momo-qr">
                                     </div>
                                     <div class="col-xl-2"></div>
                                 </div>
@@ -49,7 +50,7 @@
                                     <div class="form-group">
                                         <label for="shop-name">Shop Name:</label>
                                         <input type="text" class="form-control" placeholder="" name="updatename"
-                                            value="{{shopInfor.shopname}}" id="shop-name">
+                                            value="{{shopInfor.shopname}}" id="edit-shop-name">
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
@@ -58,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="update-description">Description</label>
                                         <input type="text" class="form-control" placeholder="" name="updatedescription"
-                                            value="{{shopInfor.shopdescription}}" id="update-description">
+                                            value="{{shopInfor.shopdescription}}" id="edit-shop-description">
                                     </div>
                                 </div>
                                 <div class="w-100"></div>
@@ -67,7 +68,7 @@
                                     <div class="form-group">
                                         <label for="update-bank">Bank account number:</label>
                                         <input type="text" class="form-control" placeholder="" name="updatebank"
-                                            value="{{shopInfor.bankaccount}}" id="update-bank">
+                                            value="{{shopInfor.bankaccount}}" id="edit-shop-bank">
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +79,7 @@
                                 <div class="col-2"></div>
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <input type="submit" class="form-control edit-shop-infor-button" id="submit"
+                                        <input type="submit" class="form-control edit-shop-infor-button" id="update-shop-infor-submit"
                                             value="Update">
                                     </div>
                                 </div>
@@ -86,6 +87,12 @@
                             </div>
                             <div class="w-100"></div>
                             <div class="w-100"></div>
+                            <div id="shop-img-error" style="display: none;" class="update-shop-infor-error">Shop image: Only .jpg/.jpeg/.png/.svg allowed</div>
+                            <div id="momo-img-error" style="display: none;" class="update-shop-infor-error">MoMo QR: Only .jpg/.jpeg/.png/.svg allowed</div>
+                            <div id="shop-name-error" style="display: none;" class="update-shop-infor-error">Shop name: invalid special character in the string</div>
+                            <div id="shop-description-error" style="display: none;" class="update-shop-infor-error">Shop description: invalid special character in the string</div>
+                            <div id="shop-bank-error" style="display: none;" class="update-shop-infor-error">Shop bank's account must be digits</div>
+
                             {{#if error}}
                             <div class="col-md-8">{{error}}</div>
                             {{/if}}

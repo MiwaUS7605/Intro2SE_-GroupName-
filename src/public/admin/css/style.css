@@ -10490,13 +10490,13 @@ tr td:first-child:before
   font-weight: 900;
 }
 
-.edit-shop-infor-button:hover
+/* .edit-shop-infor-button:hover
 {
   background-color: green;
   color: white;
   width: 110%;
   height: 105%;
-}
+} */
 
 .edit-shop-infor-button>a
 {
@@ -10505,10 +10505,10 @@ tr td:first-child:before
   font-weight: 900;
 }
 
-.edit-shop-infor-button>a:hover
+/* .edit-shop-infor-button>a:hover
 {
   color: white  ;
-}
+} */
 
 .edit-shop-infor-momo-qr
 {
@@ -10516,4 +10516,12 @@ tr td:first-child:before
   height: 150px;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
   
+}
+
+.update-shop-infor-error
+{
+  text-align: center;
+  color: red;
+  font-size: 1.5em;
+  word-wrap: break-word;
 }
