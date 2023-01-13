@@ -5,9 +5,15 @@ function acceptOrder(idOrder){
         data: { idorder: idOrder },
         dataType: 'json',
         success: function (data) {
-            alert("Accept order successfully!!");
-            location.href='http://localhost:3000/deliverer/available-order';
-
+            console.log(data);
+            if (data.status){
+                alert("Accept order successfully!!");
+                location.href='http://localhost:3000/deliverer/available-order';
+            }
+            else{
+                alert("Please sign in first!!");
+                location.href='http://localhost:3000/users/auth/login';
+            } 
         },
         error: function (data) {
             alert("Can not accept...");

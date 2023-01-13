@@ -63,8 +63,10 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="/deliverer/available-order">Available order</a></li>
-                <li><a href="/deliverer/handling-order">Handling order</a></li>
-                <li><a href="/deliverer/completed-order">Completed order</a></li>
+                {{#if res.locals.user}}
+                    <li><a href="/deliverer/handling-order">Handling order</a></li>
+                    <li><a href="/deliverer/completed-order">Completed order</a></li>
+                {{/if}}
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -135,8 +137,10 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="/deliverer/available-order">Available Orders</a></li>
-                            <li><a href="/deliverer/handling-order">Handling Orders</a></li>
-                            <li><a href="/deliverer/completed-order">Completed Orders</a></li>
+                            {{#if user}}
+                                <li><a href="/deliverer/handling-order">Handling Orders</a></li>
+                                <li><a href="/deliverer/completed-order">Completed Orders</a></li>
+                            {{/if}}
                         </ul>
                     </nav>
                 </div>

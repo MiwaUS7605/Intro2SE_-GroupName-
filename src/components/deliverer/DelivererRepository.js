@@ -66,6 +66,11 @@ class DelivererRepository{
         await db.connection.execute(query_str,[idorder]);
     }
     
+    async checkDelivererExist(idorder){
+        let query_str="select * from `order` where idorder=? and iddeliverer is not null";
+        const result= await db.connection.execute(query_str,[idorder]);
+        return result[0].length > 0;
+    }
 }
 
 module.exports = new DelivererRepository();
