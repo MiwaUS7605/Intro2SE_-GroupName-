@@ -32,13 +32,21 @@ class ShopController {
 
     async ratingshop(req, res, next) {
         try{ 
+            let defaultrate = 0;
             const { rate, message, idshop } = req.body;
             
+            defaultrate = rate? rate:defaultrate;
+            console.log('ratings', defaultrate, message, idshop);
+
+            if (!message){
+                res.redirect(`/users/shops/${idshop}`);
+                return;
+            }
             let email = res.locals.user.email;
             if (!email) return;
             
             const iduser = await authService.getUserIdByEmail(email);
-            await shopRepo.rating(rate,message,idshop,iduser['idaccount']);
+            await shopRepo.rating(defaultrate,message,idshop,iduser['idaccount']);
             console.log(iduser);
             
             res.redirect(`/users/shops/${idshop}`);
